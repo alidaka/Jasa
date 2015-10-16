@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Jasa</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="films_label">Films</string>
+    <string name="people_label">People</string>
+    <string name="planets_label">Planets</string>
+    <string name="species_label">Species</string>
+    <string name="starships_label">Starships</string>
+    <string name="vehicles_label">Vehicles</string>
+
+</resources>
