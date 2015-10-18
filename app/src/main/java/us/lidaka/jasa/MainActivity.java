@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(AssetType.fromInt(position)))
+                .replace(R.id.container, AssetListFragment.newInstance(AssetType.fromInt(position)))
                 .commit();
     }
 
@@ -101,57 +101,5 @@ public class MainActivity extends AppCompatActivity
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements SwapiResponseListener {
-        private static final String ARG_ASSET_NUMBER = "category_number";
-
-        private String mContent = null;
-
-        private SwapiResponseListener responseListener = null;
-
-        public static PlaceholderFragment newInstance(AssetType asset) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_ASSET_NUMBER, asset.getValue());
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-            if (mContent != null) {
-
-            }
-
-            // else attach listener
-
-            // Check in case the request returned during while hooking the listener
-            if (mContent != null) {
-
-            }
-
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            AssetType assetType = AssetType.fromInt(getArguments().getInt(ARG_ASSET_NUMBER));
-
-            // TODO: initiate the service request
-
-            ((MainActivity) activity).onSectionAttached(assetType);
-        }
-
-        @Override
-        public void onResponseReceived(String s) {
-            mContent = s;
-            // TODO: update view
-        }
-    }
 
 }

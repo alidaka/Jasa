@@ -41,6 +41,6 @@ public class Film extends SwapiAsset implements Serializable {
     public ArrayList<String> speciesUrls;
 
     public Film() {
-        super("http://swapi.co/api/film/");
+        super("http://swapi.co/api/films/");
     }
 }
