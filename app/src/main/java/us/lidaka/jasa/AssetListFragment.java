@@ -25,6 +25,8 @@ import us.lidaka.jasa.Model.SwapiResponseListener;
 public class AssetListFragment extends Fragment implements SwapiResponseListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
     private static final String ARG_ASSET_NUMBER = "category_number";
 
+    private AssetType assetType = AssetType.INVALID;
+
     private String nextPageUrl = null;
 
     private ArrayList<SwapiAsset> results = new ArrayList<>();
@@ -37,12 +39,16 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
 
     private LinearLayout spinnerFooter = null;
 
-    private volatile int ongoingNetworkRequests = 0;
+    // For long-running tasks
+    private volatile int oustandingNetworkRequests = 0;
 
-    public static AssetListFragment newInstance(AssetType asset) {
+    // Potentially short-running, or hasn't yet hit the network
+    private volatile int outstandingDataLoads = 0;
+
+    public static AssetListFragment newInstance(AssetType assetType) {
         AssetListFragment fragment = new AssetListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_ASSET_NUMBER, asset.getValue());
+        args.putInt(ARG_ASSET_NUMBER, assetType.getValue());
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,7 +64,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
                 this.bigSpinner.setVisibility(View.GONE);
             }
 
-            if (ongoingNetworkRequests > 0) {
+            if (this.outstandingDataLoads > 0) {
                 if (this.listView != null && this.spinnerFooter != null) {
                     this.listView.addFooterView(this.spinnerFooter);
                 }
@@ -72,7 +78,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
                 this.listView.removeFooterView(this.spinnerFooter);
             }
 
-            if (ongoingNetworkRequests > 0) {
+            if (this.oustandingNetworkRequests > 0) {
                 if (this.bigSpinner != null) {
                     this.bigSpinner.setVisibility(View.VISIBLE);
                 }
@@ -86,7 +92,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
 
     @Override
     public void onNetworkRequestInitiated() {
-        this.ongoingNetworkRequests++;
+        this.oustandingNetworkRequests++;
         this.updateSpinnerState();
     }
 
@@ -94,7 +100,8 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     public void onListResponseReceived(SwapiListPage swapiListPage) {
         this.nextPageUrl = swapiListPage.nextUrl;
         this.results.addAll(swapiListPage.results);
-        this.ongoingNetworkRequests--;
+        this.oustandingNetworkRequests--;
+        this.outstandingDataLoads--;
 
         this.updateSpinnerState();
 
@@ -131,12 +138,13 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        AssetType assetType = AssetType.fromInt(getArguments().getInt(ARG_ASSET_NUMBER));
+        this.assetType = AssetType.fromInt(getArguments().getInt(ARG_ASSET_NUMBER));
 
-        SwapiListRequest request = new SwapiListRequest(assetType, this);
+        this.outstandingDataLoads++;
+        SwapiListRequest request = new SwapiListRequest(this.assetType, this);
         request.execute();
 
-        ((MainActivity) activity).onSectionAttached(assetType);
+        ((MainActivity) activity).onSectionAttached(this.assetType);
     }
 
     @Override
@@ -150,6 +158,12 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
+        if (this.nextPageUrl != null) {
+            if (this.oustandingNetworkRequests == 0) {
+                this.outstandingDataLoads++;
+                SwapiListRequest request = new SwapiListRequest(this.assetType, this.nextPageUrl, this);
+                request.execute();
+            }
+        }
     }
 }
