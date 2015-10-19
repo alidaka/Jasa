@@ -21,7 +21,6 @@ public class Film extends SwapiAsset implements Serializable {
 
     public String producer;
 
-    // TODO: Date
     @SerializedName("release_date")
     public String releaseDate;
 
@@ -40,7 +39,8 @@ public class Film extends SwapiAsset implements Serializable {
     @SerializedName("species")
     public ArrayList<String> speciesUrls;
 
-    public Film() {
-        super("http://swapi.co/api/films/");
+    @Override
+    public String toString() {
+        return this.title;
     }
 }

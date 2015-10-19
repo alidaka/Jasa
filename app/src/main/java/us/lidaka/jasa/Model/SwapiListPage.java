@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by augustus on 10/16/15.
  */
-public class SwapiList<SwapiAsset> implements Serializable {
+public class SwapiListPage<T extends SwapiAsset> implements Serializable {
     public int count;
 
     @SerializedName("next")
@@ -17,6 +17,5 @@ public class SwapiList<SwapiAsset> implements Serializable {
     @SerializedName("previous")
     public String previousUrl;
 
-    @SerializedName("results")
-    public ArrayList<SwapiAsset> foobar;
+    public ArrayList<T> results;
 }

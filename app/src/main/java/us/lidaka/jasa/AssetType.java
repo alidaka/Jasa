@@ -14,6 +14,17 @@ public enum AssetType {
 
     private final int value;
 
+    // The URLs for paging all assets of each type
+    // Note: order is important here! And ensure all paths end in '/'
+    private static final String[] baseUrls = new String[] {
+            "http://swapi.co/api/films/",
+            "http://swapi.co/api/people/",
+            "http://swapi.co/api/planets/",
+            "http://swapi.co/api/species/",
+            "http://swapi.co/api/starships/",
+            "http://swapi.co/api/vehicles/"
+    };
+
     private AssetType(int value) {
         this.value = value;
     }
@@ -53,5 +64,14 @@ public enum AssetType {
         } else {
             return INVALID;
         }
+    }
+
+    public static String getBaseUrl(AssetType assetType) {
+        return AssetType.baseUrls[assetType.getValue()];
+    }
+
+    public static String getUrl(AssetType assetType, int id) {
+        String baseUrl = AssetType.getBaseUrl(assetType);
+        return String.format("%s%d/", baseUrl, id);
     }
 }

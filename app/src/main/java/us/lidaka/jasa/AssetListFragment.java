@@ -6,22 +6,38 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import us.lidaka.jasa.Model.Film;
-import us.lidaka.jasa.Model.SwapiAssetRequest;
+import java.util.ArrayList;
+
+import us.lidaka.jasa.Model.SwapiAsset;
+import us.lidaka.jasa.Model.SwapiListPage;
 import us.lidaka.jasa.Model.SwapiListRequest;
 import us.lidaka.jasa.Model.SwapiResponseListener;
 
 /**
  * Created by augustus on 10/16/15.
  */
-public class AssetListFragment extends Fragment implements SwapiResponseListener {
+public class AssetListFragment extends Fragment implements SwapiResponseListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
     private static final String ARG_ASSET_NUMBER = "category_number";
 
-    private String mContent = null;
+    private String nextPageUrl = null;
 
-    private SwapiResponseListener responseListener = null;
+    private ArrayList<SwapiAsset> results = new ArrayList<>();
+
+    private ArrayAdapter adapter = null;
+
+    private LinearLayout bigSpinner = null;
+
+    private ListView listView = null;
+
+    private LinearLayout spinnerFooter = null;
+
+    private volatile int ongoingNetworkRequests = 0;
 
     public static AssetListFragment newInstance(AssetType asset) {
         AssetListFragment fragment = new AssetListFragment();
@@ -34,24 +50,80 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     public AssetListFragment() {
     }
 
+    private void updateSpinnerState() {
+        // If we are performing the initial request, show the big spinner; otherwise small
+        // Note: slightly unconventional reordering to reduce volatile reads, and a bit verbose due to unknown initialization state
+        if (this.results.size() > 0) {
+            if (this.bigSpinner != null) {
+                this.bigSpinner.setVisibility(View.GONE);
+            }
+
+            if (ongoingNetworkRequests > 0) {
+                if (this.listView != null && this.spinnerFooter != null) {
+                    this.listView.addFooterView(this.spinnerFooter);
+                }
+            } else {
+                if (this.listView != null && this.spinnerFooter != null) {
+                    this.listView.removeFooterView(this.spinnerFooter);
+                }
+            }
+        } else {
+            if (this.listView != null && this.spinnerFooter != null) {
+                this.listView.removeFooterView(this.spinnerFooter);
+            }
+
+            if (ongoingNetworkRequests > 0) {
+                if (this.bigSpinner != null) {
+                    this.bigSpinner.setVisibility(View.VISIBLE);
+                }
+            } else {
+                if (this.bigSpinner != null) {
+                    this.bigSpinner.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onNetworkRequestInitiated() {
+        this.ongoingNetworkRequests++;
+        this.updateSpinnerState();
+    }
+
+    @Override
+    public void onListResponseReceived(SwapiListPage swapiListPage) {
+        this.nextPageUrl = swapiListPage.nextUrl;
+        this.results.addAll(swapiListPage.results);
+        this.ongoingNetworkRequests--;
+
+        this.updateSpinnerState();
+
+        if (this.adapter != null) {
+            this.adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onAssetResponseReceived(SwapiAsset swapiAsset) {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ListView view = (ListView)inflater.inflate(R.layout.fragment_asset_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_asset_list, container, false);
 
-        // TODO
-        SwapiListRequest<Film> request = new SwapiListRequest(Film.class);
-        request.execute();
+        this.adapter = new ArrayAdapter<SwapiAsset>(this.getActivity(), android.R.layout.simple_list_item_1, this.results);
+        this.listView = (ListView)view.findViewById(R.id.asset_list);
+        this.listView.setAdapter(this.adapter);
 
-        if (mContent != null) {
+        this.bigSpinner = (LinearLayout)view.findViewById(R.id.loading_spinner);
 
-        }
+        this.spinnerFooter = (LinearLayout)inflater.inflate(R.layout.layout_loading_spinner, null);
+        this.spinnerFooter.setVisibility(View.VISIBLE);
+        this.listView.setFooterDividersEnabled(false);
 
-        // else attach listener
-
-        // Check in case the request returned during while hooking the listener
-        if (mContent != null) {
-
-        }
+        // Must update view state in case the response callback ran before creating the adapter
+        this.updateSpinnerState();
+        this.adapter.notifyDataSetChanged();
 
         return view;
     }
@@ -61,14 +133,23 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
         super.onAttach(activity);
         AssetType assetType = AssetType.fromInt(getArguments().getInt(ARG_ASSET_NUMBER));
 
-        // TODO: initiate the service request
+        SwapiListRequest request = new SwapiListRequest(assetType, this);
+        request.execute();
 
         ((MainActivity) activity).onSectionAttached(assetType);
     }
 
     @Override
-    public void onResponseReceived(String s) {
-        mContent = s;
-        // TODO: update view
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // TODO: navigate to that item!
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
     }
 }
