@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public class Person extends SwapiAsset implements Serializable {
     public String height;
 
-    public int mass;
+    public String mass;
 
     @SerializedName("hair_color")
     public String hairColor;

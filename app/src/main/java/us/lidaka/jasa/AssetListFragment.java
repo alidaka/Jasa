@@ -93,7 +93,14 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     @Override
     public void onNetworkRequestInitiated() {
         this.oustandingNetworkRequests++;
-        this.updateSpinnerState();
+
+        final AssetListFragment _this = this;
+        this.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                _this.updateSpinnerState();
+            }
+        });
     }
 
     @Override
@@ -121,6 +128,8 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
         this.adapter = new ArrayAdapter<SwapiAsset>(this.getActivity(), android.R.layout.simple_list_item_1, this.results);
         this.listView = (ListView)view.findViewById(R.id.asset_list);
         this.listView.setAdapter(this.adapter);
+
+        this.listView.setOnScrollListener(this);
 
         this.bigSpinner = (LinearLayout)view.findViewById(R.id.loading_spinner);
 
@@ -159,7 +168,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (this.nextPageUrl != null) {
-            if (this.oustandingNetworkRequests == 0) {
+            if ((this.oustandingNetworkRequests == 0) && ((totalItemCount - visibleItemCount) <= firstVisibleItem)) {
                 this.outstandingDataLoads++;
                 SwapiListRequest request = new SwapiListRequest(this.assetType, this.nextPageUrl, this);
                 request.execute();
