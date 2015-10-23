@@ -2,15 +2,23 @@ package us.lidaka.jasa.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import us.lidaka.jasa.AssetType;
+
 /**
  * Created by augustus on 10/15/15.
  */
 public abstract class SwapiAsset {
     public String name;
 
+    public AssetType assetType;
+
     public String url;
 
     private int id = -1;
+
+    public SwapiAsset(AssetType assetType) {
+        this.assetType = assetType;
+    }
 
     public int getId() {
         if (this.id == -1) {

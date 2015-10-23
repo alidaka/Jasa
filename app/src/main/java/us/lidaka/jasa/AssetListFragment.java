@@ -130,6 +130,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
         this.listView.setAdapter(this.adapter);
 
         this.listView.setOnScrollListener(this);
+        this.listView.setOnItemClickListener(this);
 
         this.bigSpinner = (LinearLayout)view.findViewById(R.id.loading_spinner);
 
@@ -153,12 +154,14 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
         SwapiListRequest request = new SwapiListRequest(this.assetType, this);
         request.execute();
 
-        ((MainActivity) activity).onSectionAttached(this.assetType);
+        ((MainActivity)activity).onSectionAttached(this.assetType.toString());
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // TODO: navigate to that item!
+        SwapiAsset asset = (SwapiAsset)this.adapter.getItem(position);
+        ((MainActivity)this.getActivity()).onAssetSelected(asset);
     }
 
     @Override

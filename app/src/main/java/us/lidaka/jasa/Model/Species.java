@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.annotations.SerializedName;
 
+import us.lidaka.jasa.AssetType;
+
 /**
  * Created by augustus on 10/18/15.
  */
@@ -38,4 +40,8 @@ public class Species extends SwapiAsset implements Serializable {
 
     @SerializedName("films")
     public ArrayList<String> filmUrls;
+
+    public Species() {
+        super(AssetType.SPECIES);
+    }
 }

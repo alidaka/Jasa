@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import us.lidaka.jasa.Model.SwapiAsset;
 import us.lidaka.jasa.Model.SwapiResponseListener;
 
 public class MainActivity extends AppCompatActivity
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    // TODO: passet AssetType instead, or something
+    // TODO: pass AssetType instead, or something
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -58,8 +59,28 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
-    public void onSectionAttached(AssetType asset) {
-        mTitle = asset.toString();
+    public void onSectionAttached(String title) {
+        mTitle = title;
+        restoreActionBar();
+    }
+
+    public void onAssetSelected(SwapiAsset asset) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // TODO: this needs more thought
+        Fragment fragment;
+        switch (asset.assetType) {
+            case FILM:
+                fragment = FilmFragment.newInstance(asset.url);
+                break;
+            default:
+                fragment = null;
+                break;
+        }
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     public void restoreActionBar() {

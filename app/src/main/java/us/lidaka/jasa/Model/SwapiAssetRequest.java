@@ -32,7 +32,6 @@ public class SwapiAssetRequest extends AsyncTask<Void, Void, SwapiAsset> {
                 this.url = AssetType.getUrl(AssetType.FILM, id);
                 break;
             case PERSON:
-                // TODO: update the rest of these
                 this.typeToken = new TypeToken<Person>(){};
                 this.url = AssetType.getUrl(AssetType.PERSON, id);
                 break;
@@ -73,6 +72,9 @@ public class SwapiAssetRequest extends AsyncTask<Void, Void, SwapiAsset> {
         SwapiAsset result = null;
 
         // TODO: implement a caching layer and check it here
+
+        // We don't have the data cached, so we'll have to fetch it
+        this.listener.onNetworkRequestInitiated();
 
         try {
             URL url = new URL(this.url);

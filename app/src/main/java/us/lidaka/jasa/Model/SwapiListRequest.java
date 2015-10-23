@@ -32,7 +32,6 @@ public class SwapiListRequest extends AsyncTask<Void, Void, SwapiListPage> {
                 this.url = AssetType.getBaseUrl(AssetType.FILM);
                 break;
             case PERSON:
-                // TODO: update the rest of these
                 this.typeToken = new TypeToken<SwapiListPage<Person>>(){};
                 this.url = AssetType.getBaseUrl(AssetType.PERSON);
                 break;
