@@ -17,6 +17,8 @@ public class Planet extends SwapiAsset implements Serializable {
     @SerializedName("orbital_period")
     public String orbitalPeriod;
 
+    public String diameter;
+
     public String climate;
 
     public String gravity;

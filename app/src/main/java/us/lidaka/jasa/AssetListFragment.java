@@ -40,7 +40,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     private LinearLayout spinnerFooter = null;
 
     // For long-running tasks
-    private volatile int oustandingNetworkRequests = 0;
+    private volatile int outstandingNetworkRequests = 0;
 
     // Potentially short-running, or hasn't yet hit the network
     private volatile int outstandingDataLoads = 0;
@@ -78,7 +78,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
                 this.listView.removeFooterView(this.spinnerFooter);
             }
 
-            if (this.oustandingNetworkRequests > 0) {
+            if (this.outstandingNetworkRequests > 0) {
                 if (this.bigSpinner != null) {
                     this.bigSpinner.setVisibility(View.VISIBLE);
                 }
@@ -92,7 +92,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
 
     @Override
     public void onNetworkRequestInitiated() {
-        this.oustandingNetworkRequests++;
+        this.outstandingNetworkRequests++;
 
         final AssetListFragment _this = this;
         this.getActivity().runOnUiThread(new Runnable() {
@@ -107,7 +107,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     public void onListResponseReceived(SwapiListPage swapiListPage) {
         this.nextPageUrl = swapiListPage.nextUrl;
         this.results.addAll(swapiListPage.results);
-        this.oustandingNetworkRequests--;
+        this.outstandingNetworkRequests--;
         this.outstandingDataLoads--;
 
         this.updateSpinnerState();
@@ -171,7 +171,7 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (this.nextPageUrl != null) {
-            if ((this.oustandingNetworkRequests == 0) && ((totalItemCount - visibleItemCount) <= firstVisibleItem)) {
+            if ((this.outstandingNetworkRequests == 0) && ((totalItemCount - visibleItemCount) <= firstVisibleItem)) {
                 this.outstandingDataLoads++;
                 SwapiListRequest request = new SwapiListRequest(this.assetType, this.nextPageUrl, this);
                 request.execute();

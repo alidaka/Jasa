@@ -18,14 +18,49 @@
     <string name="species_label">Species</string>
     <string name="starships_label">Starships</string>
     <string name="vehicles_label">Vehicles</string>
+    <string name="characters_label">Characters</string>
+    <string name="residents_label">Residents</string>
+    <string name="pilots_label">Pilots</string>
 
     <string name="episode_label">Episode</string>
     <string name="episode_format">Episode %d</string>
     <string name="producer_format">Producer: %s</string>
     <string name="director_format">Director: %s</string>
     <string name="release_date_format">Released on %s</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rotation_period_format">Rotation period: %s</string>
+    <string name="orbital_period_format">Orbital period: %s</string>
+    <string name="diameter_format">Diameter: %s</string>
+    <string name="climate_format">Climate: %s</string>
+    <string name="gravity_format">Gravity: %s</string>
+    <string name="terrain_format">Terrain: %s</string>
+    <string name="surface_water_format">Surface water: %s</string>
+    <string name="population_format">Population: %s</string>
+    <string name="height_format">Height: %s</string>
+    <string name="weight_format">Weight: %s</string>
+    <string name="skin_color_format">Skin color: %s</string>
+    <string name="hair_color_format">Hair color: %s</string>
+    <string name="eye_color_format">Eye color: %s</string>
+    <string name="birth_year_format">Born: %s</string>
+    <string name="homeworld_format">Homeworld: %s</string>
+    <string name="classification_format">Classification: %s</string>
+    <string name="designation_format">Designation: %s</string>
+    <string name="average_height_format">Average height: %s</string>
+    <string name="skin_colors_format">Skin colors: %s</string>
+    <string name="hair_colors_format">Hair colors: %s</string>
+    <string name="eye_colors_format">Eye colors: %s</string>
+    <string name="average_lifespan_format">Average lifespan: %s</string>
+    <string name="language_format">Language: %s</string>
+    <string name="model_format">Model: %s</string>
+    <string name="manufacturer_format">Manufacturer: %s</string>
+    <string name="cost_format">Cost: %s</string>
+    <string name="length_format">Length: %s</string>
+    <string name="max_atmosphering_speed_format">Max atmosphering speed: %s</string>
+    <string name="crew_format">Crew: %s</string>
+    <string name="passengers_format">Passengers: %s</string>
+    <string name="cargo_capacity_format">Cargo capacity: %s</string>
+    <string name="consumables_format">Consumables: %s</string>
+    <string name="hyperdrive_rating_format">Hyperdrive rating: %s</string>
+    <string name="megalights_per_hour_format">Megalights per hour: %s</string>
+    <string name="class_format">Class: %s</string>
 
 </resources>

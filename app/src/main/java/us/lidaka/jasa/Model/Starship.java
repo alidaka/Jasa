@@ -33,7 +33,7 @@ public class Starship extends SwapiAsset implements Serializable {
     public String consumables;
 
     @SerializedName("hyperdrive_rating")
-    public float hyperdriveRating;
+    public String hyperdriveRating;
 
     @SerializedName("MGLT")
     public String megalightsPerHour;

@@ -1,25 +1,23 @@
 package us.lidaka.jasa;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
+import java.security.InvalidParameterException;
+
+import us.lidaka.jasa.AssetFragments.FilmFragment;
+import us.lidaka.jasa.AssetFragments.PersonFragment;
+import us.lidaka.jasa.AssetFragments.PlanetFragment;
+import us.lidaka.jasa.AssetFragments.SpeciesFragment;
+import us.lidaka.jasa.AssetFragments.StarshipFragment;
+import us.lidaka.jasa.AssetFragments.VehicleFragment;
 import us.lidaka.jasa.Model.SwapiAsset;
-import us.lidaka.jasa.Model.SwapiResponseListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -73,9 +71,24 @@ public class MainActivity extends AppCompatActivity
             case FILM:
                 fragment = FilmFragment.newInstance(asset.url);
                 break;
-            default:
-                fragment = null;
+            case PERSON:
+                fragment = PersonFragment.newInstance(asset.url);
                 break;
+            case PLANET:
+                fragment = PlanetFragment.newInstance(asset.url);
+                break;
+            case SPECIES:
+                fragment = SpeciesFragment.newInstance(asset.url);
+                break;
+            case STARSHIP:
+                fragment = StarshipFragment.newInstance(asset.url);
+                break;
+            case VEHICLE:
+                fragment = VehicleFragment.newInstance(asset.url);
+                break;
+            default:
+                String message = String.format("Invalid asset type \"%s\"", asset.assetType.toString());
+                throw new InvalidParameterException(message);
         }
 
         fragmentManager.beginTransaction()
@@ -85,9 +98,11 @@ public class MainActivity extends AppCompatActivity
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(mTitle);
+        }
     }
 
 
