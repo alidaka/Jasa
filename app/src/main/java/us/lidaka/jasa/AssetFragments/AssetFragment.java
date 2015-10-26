@@ -96,6 +96,7 @@ public abstract class AssetFragment extends Fragment implements SwapiResponseLis
         AssetFragment.setListViewHeightBasedOnChildren(lv, adapter);
 
         // TODO: set onClickItemListener
+        // This is tied to hydrating/friendly naming/binding to objects instead of strings (lists of URLs)
     }
 
     public static void setListViewHeightBasedOnChildren(ListView view, ListAdapter adapter) {

@@ -159,7 +159,6 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // TODO: navigate to that item!
         SwapiAsset asset = (SwapiAsset)this.adapter.getItem(position);
         ((MainActivity)this.getActivity()).onAssetSelected(asset);
     }
