@@ -28,12 +28,12 @@ public class PersonFragment extends AssetFragment {
     }
 
     @Override
-    protected void updateView() {
+    protected void updateView(View existingView) {
         if (this.asset != null) {
             Person person = (Person)this.asset;
             this.setTitle(person.name);
 
-            ScrollView thisView = (ScrollView)this.getView();
+            ScrollView thisView = (existingView != null) ? (ScrollView)existingView : (ScrollView)this.getView();
             if (thisView != null) {
                 View view = thisView.findViewById(R.id.person_detail_layout);
                 if (view != null) {

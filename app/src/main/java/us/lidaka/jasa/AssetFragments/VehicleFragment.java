@@ -27,12 +27,12 @@ public class VehicleFragment extends AssetFragment {
     }
 
     @Override
-    protected void updateView() {
+    protected void updateView(View existingView) {
         if (this.asset != null) {
             Vehicle vehicle = (Vehicle)this.asset;
             this.setTitle(vehicle.name);
 
-            ScrollView thisView = (ScrollView)this.getView();
+            ScrollView thisView = (existingView != null) ? (ScrollView)existingView : (ScrollView)this.getView();
             if (thisView != null) {
                 View view = thisView.findViewById(R.id.vehicle_detail_layout);
                 if (view != null) {

@@ -28,12 +28,12 @@ public class SpeciesFragment extends AssetFragment {
     }
 
     @Override
-    protected void updateView() {
+    protected void updateView(View existingView) {
         if (this.asset != null) {
             Species species = (Species)this.asset;
             this.setTitle(species.name);
 
-            ScrollView thisView = (ScrollView)this.getView();
+            ScrollView thisView = (existingView != null) ? (ScrollView)existingView : (ScrollView)this.getView();
             if (thisView != null) {
                 View view = thisView.findViewById(R.id.species_detail_layout);
                 if (view != null) {

@@ -1,8 +1,11 @@
 package us.lidaka.jasa.AssetFragments;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import us.lidaka.jasa.AssetType;
@@ -27,13 +30,13 @@ public class FilmFragment extends AssetFragment {
     }
 
     @Override
-    protected void updateView() {
+    protected void updateView(View existingView) {
         if (this.asset != null) {
             Film film = (Film)this.asset;
             String title = String.format(getString(R.string.episode_format), film.episodeId);
             this.setTitle(title);
 
-            ScrollView thisView = (ScrollView)this.getView();
+            ScrollView thisView = (existingView != null) ? (ScrollView)existingView : (ScrollView)this.getView();
             if (thisView != null) {
                 View view = thisView.findViewById(R.id.film_detail_layout);
                 if (view != null) {
@@ -61,11 +64,11 @@ public class FilmFragment extends AssetFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String title = this.getString(R.string.episode_label);
         this.setTitle(title);
+
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
 }

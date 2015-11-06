@@ -142,6 +142,8 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
         this.updateSpinnerState();
         this.adapter.notifyDataSetChanged();
 
+        ((MainActivity)getActivity()).onSectionAttached(this.assetType.toString());
+
         return view;
     }
 
@@ -153,8 +155,6 @@ public class AssetListFragment extends Fragment implements SwapiResponseListener
         this.outstandingDataLoads++;
         SwapiListRequest request = new SwapiListRequest(this.assetType, this);
         request.execute();
-
-        ((MainActivity)activity).onSectionAttached(this.assetType.toString());
     }
 
     @Override

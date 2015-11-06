@@ -28,12 +28,12 @@ public class PlanetFragment extends AssetFragment {
     }
 
     @Override
-    protected void updateView() {
+    protected void updateView(View existingView) {
         if (this.asset != null) {
             Planet planet = (Planet)this.asset;
             this.setTitle(planet.name);
 
-            ScrollView thisView = (ScrollView)this.getView();
+            ScrollView thisView = (existingView != null) ? (ScrollView)existingView : (ScrollView)this.getView();
             if (thisView != null) {
                 View view = thisView.findViewById(R.id.planet_detail_layout);
                 if (view != null) {

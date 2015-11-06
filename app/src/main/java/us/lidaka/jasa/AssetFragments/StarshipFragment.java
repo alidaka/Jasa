@@ -27,12 +27,12 @@ public class StarshipFragment extends AssetFragment {
     }
 
     @Override
-    protected void updateView() {
+    protected void updateView(View existingView) {
         if (this.asset != null) {
             Starship starship = (Starship)this.asset;
             this.setTitle(starship.name);
 
-            ScrollView thisView = (ScrollView)this.getView();
+            ScrollView thisView = (existingView != null) ? (ScrollView)existingView : (ScrollView)this.getView();
             if (thisView != null) {
                 View view = thisView.findViewById(R.id.starship_detail_layout);
                 if (view != null) {

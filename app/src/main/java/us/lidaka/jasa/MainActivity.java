@@ -1,5 +1,7 @@
 package us.lidaka.jasa;
 
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -49,12 +51,15 @@ public class MainActivity extends AppCompatActivity
 
     // TODO: pass AssetType instead, or something
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(int position, boolean initialNavigation) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, AssetListFragment.newInstance(AssetType.fromInt(position)))
-                .commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.container, AssetListFragment.newInstance(AssetType.fromInt(position)));
+        if (!initialNavigation) {
+            fragmentTransaction.addToBackStack(null);
+        }
+
+        fragmentTransaction.commit();
     }
 
     public void onSectionAttached(String title) {
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -134,8 +140,13 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+    @Override
+    public void onBackPressed() {
+        if (this.mNavigationDrawerFragment.isDrawerOpen()) {
+            this.mNavigationDrawerFragment.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 }

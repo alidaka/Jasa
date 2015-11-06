@@ -38,6 +38,8 @@ public abstract class AssetFragment extends Fragment implements SwapiResponseLis
 
     private int viewResourceId;
 
+    SwapiAssetRequest request = null;
+
     protected SwapiAsset asset;
 
     public AssetFragment(AssetType assetType, int viewResourceId) {
@@ -50,6 +52,24 @@ public abstract class AssetFragment extends Fragment implements SwapiResponseLis
         fragment.setArguments(args);
     }
 
+    // Note: not really threadsafe, but should only be called from onAttach/onCreate/onCreateView,
+    // which are always run on one thread (the UI thread)
+    private void ensureRequested() {
+        if (this.request == null) {
+            this.request = new SwapiAssetRequest(this.assetType, this.url, this);
+            this.request.execute();
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.url = getArguments().getString(ARG_ASSET_URL);
+
+        this.ensureRequested();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +77,14 @@ public abstract class AssetFragment extends Fragment implements SwapiResponseLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.ensureRequested();
+
         View view = inflater.inflate(this.viewResourceId, container, false);
 
         this.bigSpinner = (LinearLayout)view.findViewById(R.id.loading_spinner);
 
         // Must update view state in case the response callback ran before creating the adapter
-        this.updateView();
+        this.updateView(view);
 
         return view;
     }
@@ -118,17 +140,7 @@ public abstract class AssetFragment extends Fragment implements SwapiResponseLis
         activity.onSectionAttached(title);
     }
 
-    protected abstract void updateView();
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        this.url = getArguments().getString(ARG_ASSET_URL);
-
-        SwapiAssetRequest request = new SwapiAssetRequest(this.assetType, this.url, this);
-        request.execute();
-    }
+    protected abstract void updateView(View view);
 
     @Override
     public void onNetworkRequestInitiated() {
@@ -148,6 +160,6 @@ public abstract class AssetFragment extends Fragment implements SwapiResponseLis
     @Override
     public void onAssetResponseReceived(SwapiAsset swapiAsset) {
         this.asset = swapiAsset;
-        this.updateView();
+        this.updateView(null);
     }
 }
