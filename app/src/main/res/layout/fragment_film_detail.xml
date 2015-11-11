@@ -8,38 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/layout_loading_spinner" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/film_title" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/film_director" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/film_producer" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/film_release_date" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/film_opening_crawl" />
-
-        <include layout="@layout/layout_header_list" android:id="@+id/film_character_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/film_planet_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/film_starship_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/film_vehicle_list" />
+        <include layout="@layout/layout_loading_spinner"/>
+        <TextView style="@style/Default.FilmTitle" android:id="@+id/film_title"/>
+        <TextView style="@style/Default.OpeningCrawl" android:id="@+id/film_opening_crawl"/>
+        <TextView style="@style/Default.SubHead" android:id="@+id/film_director"/>
+        <TextView style="@style/Default.SubHead" android:id="@+id/film_producer"/>
+        <TextView style="@style/Default.SubHead" android:id="@+id/film_release_date"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/film_character_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/film_planet_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/film_starship_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/film_vehicle_list"/>
 
     </LinearLayout>
 </ScrollView>
