@@ -8,61 +8,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/layout_loading_spinner" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/species_name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_classification" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_designation" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_average_height" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_skin_colors" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_hair_colors" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_eye_colors" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_average_lifespan" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_language" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/species_homeworld" />
-
-        <include layout="@layout/layout_header_list" android:id="@+id/species_people_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/species_film_list" />
+        <include layout="@layout/layout_loading_spinner"/>
+        <TextView style="@style/Default.PageTitle" android:id="@+id/species_name"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_classification"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_designation"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_average_height"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_skin_colors"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_hair_colors"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_eye_colors"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_average_lifespan"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_language"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/species_homeworld"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/species_people_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/species_film_list"/>
 
     </LinearLayout>
 </ScrollView>

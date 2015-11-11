@@ -8,66 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/layout_loading_spinner" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/vehicle_name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_model" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_manufacturer" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_length" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_class" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_cost" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_max_atmosphering_speed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_crew" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_passengers" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_cargo_capacity" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicle_consumables" />
-
-        <include layout="@layout/layout_header_list" android:id="@+id/vehicle_pilots_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/vehicle_film_list" />
+        <include layout="@layout/layout_loading_spinner"/>
+        <TextView style="@style/Default.PageTitle" android:id="@+id/vehicle_name"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_model"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_manufacturer"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_length"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_class"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_cost"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_max_atmosphering_speed"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_crew"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_passengers"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_cargo_capacity"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/vehicle_consumables"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/vehicle_pilots_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/vehicle_film_list"/>
 
     </LinearLayout>
 </ScrollView>

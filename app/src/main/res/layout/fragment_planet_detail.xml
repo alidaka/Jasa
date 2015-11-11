@@ -8,56 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/layout_loading_spinner" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/planet_name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_rotation_period" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_orbital_period" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_diameter" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_climate" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_gravity" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_terrain" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_surface_water" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/planet_population" />
-
-        <include layout="@layout/layout_header_list" android:id="@+id/planet_film_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/planet_resident_list" />
+        <include layout="@layout/layout_loading_spinner"/>
+        <TextView style="@style/Default.PageTitle" android:id="@+id/planet_name"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_rotation_period"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_orbital_period"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_diameter"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_climate"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_gravity"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_terrain"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_surface_water"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/planet_population"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/planet_film_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/planet_resident_list"/>
 
     </LinearLayout>
 </ScrollView>

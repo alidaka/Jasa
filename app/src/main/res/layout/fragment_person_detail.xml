@@ -8,58 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/layout_loading_spinner" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/person_name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_gender" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_height" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_mass" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_skin_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_hair_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_eye_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_homeworld" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/person_birth_year" />
-
-        <include layout="@layout/layout_header_list" android:id="@+id/person_film_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/person_species_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/person_starship_list" />
-        <include layout="@layout/layout_header_list" android:id="@+id/person_vehicle_list" />
+        <include layout="@layout/layout_loading_spinner"/>
+        <TextView style="@style/Default.PageTitle" android:id="@+id/person_name"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_gender"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_height"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_mass"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_skin_color"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_hair_color"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_eye_color"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_homeworld"/>
+        <TextView style="@style/Default.PageDetails" android:id="@+id/person_birth_year"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/person_film_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/person_species_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/person_starship_list"/>
+        <include layout="@layout/layout_header_list" android:id="@+id/person_vehicle_list"/>
 
     </LinearLayout>
 </ScrollView>
